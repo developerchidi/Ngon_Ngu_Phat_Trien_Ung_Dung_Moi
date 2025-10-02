@@ -27,16 +27,30 @@
       "isDelete": false,
       "createdAt": "2024-01-02T00:00:00.000Z",
       "updatedAt": "2024-01-02T00:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "username": "nguyenchidi",
+      "password": "$2b$10$p77ueu/NQA2FrZ6ZAB0QA.3P4la0Vv6NVmoh9W.CEF.dj6Cb7.G8C",
+      "email": "nguyenchidi.dev@gmail.com",
+      "fullName": "Nguyễn Thành Lộc",
+      "avatarUrl": "https://scontent.fsgn8-3.fna.fbcdn.net/v/t39.30808-6/511165586_744623838078588_7330359259982784661_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFFCFDtsA4TnERk45pZt7vkbTuPkjx17Q5tO4-SPHXtDleieKLI1V81qi1hQ2ICd2Oqbnm_wR4QTP-aQBxtTFsS&_nc_ohc=5Vfdn3egO5gQ7kNvwGoWp6Y&_nc_oc=AdkMhFvX1TmWqMZ2M67cAmhyJV-1wgk5g6SUi51l5RFMSpmW8OW1buS34xxX21eASrE&_nc_zt=23&_nc_ht=scontent.fsgn8-3.fna&_nc_gid=Qs9bC9Zv9gDe3EhOIs2bEA&oh=00_AfbMq5u22TzeamcLgVs5NId4OzBqq619rDOCGFjGxB38xw&oe=68E3B980",
+      "status": false,
+      "role": 3,
+      "loginCount": 0,
+      "isDelete": true,
+      "createdAt": "2025-10-02T01:36:09.369Z",
+      "updatedAt": "2025-10-02T01:36:17.536Z"
     }
   ],
   "roles": [
     {
       "id": 1,
       "name": "admin",
-      "description": "Administrator role with full access",
+      "description": "system admin",
       "isDelete": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2024-01-01T00:00:00.000Z"
+      "updatedAt": "2025-10-02T01:33:59.322Z"
     },
     {
       "id": 2,
@@ -45,6 +59,14 @@
       "isDelete": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
       "updatedAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "name": "customer",
+      "description": "khách thôi",
+      "isDelete": false,
+      "createdAt": "2025-10-02T01:29:05.231Z",
+      "updatedAt": "2025-10-02T01:29:05.231Z"
     }
   ]
 }

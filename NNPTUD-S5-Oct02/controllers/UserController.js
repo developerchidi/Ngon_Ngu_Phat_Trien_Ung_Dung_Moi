@@ -25,8 +25,12 @@ class UserController {
 
   getAllUsers(req, res) {
     try {
-      const { username, fullName } = req.query;
-      const filters = { username, fullName };
+      const { username, fullName, includeDeleted } = req.query;
+      const filters = { 
+        username, 
+        fullName, 
+        includeDeleted: includeDeleted === 'true' 
+      };
       
       const result = this.userService.getAllUsers(filters);
       

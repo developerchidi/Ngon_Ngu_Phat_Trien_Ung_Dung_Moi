@@ -15,10 +15,18 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Serve static files
+app.use(express.static(__dirname));
+
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/roles', roleRoutes);
 app.use('/api/auth', authRoutes);
+
+// Serve test page
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/test.html');
+});
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
@@ -32,6 +40,7 @@ app.get('/api/health', (req, res) => {
 // Start server
 app.listen(PORT, () => {
   console.log(`🚀 Server đang chạy tại http://localhost:${PORT}`);
+  console.log(`🌐 Giao diện test: http://localhost:${PORT}`);
   console.log(`📊 API endpoints:`);
   console.log(`   GET    /api/health - Health check`);
   console.log(`   GET    /api/roles - Lấy tất cả roles`);

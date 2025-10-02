@@ -69,8 +69,13 @@ class User {
   }
 
   findAll(filters = {}) {
-    const { username, fullName } = filters;
-    let users = this.db.getCollection('users').filter(user => !user.isDelete);
+    const { username, fullName, includeDeleted = false } = filters;
+    let users = this.db.getCollection('users');
+    
+    // Filter by isDelete (soft delete)
+    if (!includeDeleted) {
+      users = users.filter(user => !user.isDelete);
+    }
     
     // Filter by username (contains)
     if (username) {
