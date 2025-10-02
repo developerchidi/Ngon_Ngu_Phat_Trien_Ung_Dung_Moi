@@ -3,7 +3,7 @@ const path = require('path');
 
 class Database {
   constructor() {
-    this.dbPath = path.join(__dirname, '../db.json');
+    this.dbPath = path.join(__dirname, 'db.json');
     this.data = this.loadDatabase();
   }
 

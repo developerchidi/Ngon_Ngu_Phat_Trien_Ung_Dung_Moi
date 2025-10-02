@@ -1,6 +1,6 @@
 const User = require('../models/User');
 const Role = require('../models/Role');
-const Database = require('../models/Database');
+const Database = require('../configs/Database');
 
 class RoleService {
   constructor() {
