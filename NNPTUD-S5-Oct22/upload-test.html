@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Upload Avatar & Images - Premium UI</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #fff, #f0f8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            background-size: 200% 100%;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .auth-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+        }
+
+        .auth-card::before {
+            display: none;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title i {
+            font-size: 2rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+            font-size: 1.1rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fff;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-input {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-input-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            border: 3px dashed #667eea;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #667eea;
+            min-height: 120px;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .file-input-label:hover {
+            border-color: #764ba2;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e0e8ff 100%);
+            transform: scale(1.02);
+        }
+
+        .file-input-label i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .file-selected {
+            border-color: #28a745;
+            background: linear-gradient(135deg, #f0fff4 0%, #e8f5e8 100%);
+            color: #28a745;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #dc3545 0%, #e83e8c 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .response {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            max-height: 400px;
+            overflow-y: auto;
+            position: relative;
+            border: 2px solid;
+        }
+
+        .response.success {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .response.error {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .status-success {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            box-shadow: 0 2px 10px rgba(40, 167, 69, 0.3);
+        }
+
+        .status-error {
+            background: linear-gradient(135deg, #dc3545 0%, #e83e8c 100%);
+            color: white;
+            box-shadow: 0 2px 10px rgba(220, 53, 69, 0.3);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+        }
+
+        .preview-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .preview-image {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .preview-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .progress-container {
+            margin: 20px 0;
+            background: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 8px;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-image: linear-gradient(
+                -45deg,
+                rgba(255, 255, 255, .2) 25%,
+                transparent 25%,
+                transparent 50%,
+                rgba(255, 255, 255, .2) 50%,
+                rgba(255, 255, 255, .2) 75%,
+                transparent 75%,
+                transparent
+            );
+            background-size: 50px 50px;
+            animation: move 2s linear infinite;
+        }
+
+        @keyframes move {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-rocket"></i> Upload Premium</h1>
+            <p>Giao diện siêu đẹp cho việc upload avatar và hình ảnh</p>
+        </div>
+        
+        <div class="card auth-card">
+            <h2 class="section-title">
+                <i class="fas fa-lock"></i>
+                Authentication
+            </h2>
+            <div class="form-group">
+                <label><i class="fas fa-user"></i> Username:</label>
+                <input type="text" id="loginUsername" class="form-input" placeholder="Nhập username của bạn">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-key"></i> Password:</label>
+                <input type="password" id="loginPassword" class="form-input" placeholder="Nhập password của bạn">
+            </div>
+            <button onclick="login()" class="btn btn-success">
+                <i class="fas fa-sign-in-alt"></i>
+                Login
+            </button>
+            <button onclick="logout()" class="btn btn-danger">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </button>
+            <div id="authResponse" class="response" style="display: none;"></div>
+        </div>
+
+        <div class="grid">
+            <!-- Upload Avatar -->
+            <div class="card">
+                <h2 class="section-title">
+                    <i class="fas fa-user-circle"></i>
+                    Upload Avatar
+                </h2>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-image"></i> Chọn ảnh avatar:</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="avatarFile" class="file-input" accept="image/*">
+                        <label for="avatarFile" class="file-input-label" id="avatarLabel">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Kéo thả hoặc click để chọn ảnh</span>
+                            <small>PNG, JPG, JPEG (Max 5MB)</small>
+                        </label>
+                    </div>
+                </div>
+                
+                <button onclick="uploadAvatar()" class="btn btn-success">
+                    <i class="fas fa-upload"></i>
+                    Upload Avatar
+                </button>
+                
+                <div class="progress-container" id="avatarProgress" style="display: none;">
+                    <div class="progress-bar" id="avatarProgressFill"></div>
+                </div>
+                
+                <div id="avatarPreview" class="preview-container" style="display: none;"></div>
+                <div id="avatarResponse" class="response" style="display: none;"></div>
+            </div>
+
+            <!-- Upload Multiple Images -->
+            <div class="card">
+                <h2 class="section-title">
+                    <i class="fas fa-images"></i>
+                    Upload Nhiều Ảnh
+                </h2>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-images"></i> Chọn nhiều ảnh:</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="multipleImages" class="file-input" accept="image/*" multiple>
+                        <label for="multipleImages" class="file-input-label" id="multipleLabel">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Kéo thả hoặc click để chọn nhiều ảnh</span>
+                            <small>PNG, JPG, JPEG (Max 5MB mỗi file)</small>
+                        </label>
+                    </div>
+                </div>
+                
+                <button onclick="uploadMultipleImages()" class="btn btn-success">
+                    <i class="fas fa-upload"></i>
+                    Upload Nhiều Ảnh
+                </button>
+                
+                <div class="progress-container" id="multipleProgress" style="display: none;">
+                    <div class="progress-bar" id="multipleProgressFill"></div>
+                </div>
+                
+                <div id="multiplePreview" class="image-grid" style="display: none;"></div>
+                <div id="multipleResponse" class="response" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3000';
+        let authToken = '';
+
+        // Utility function to show response
+        function showResponse(elementId, data, isSuccess = null) {
+            const element = document.getElementById(elementId);
+            element.style.display = 'block';
+            
+            // Remove existing status classes
+            element.classList.remove('success', 'error');
+            
+            // Determine success status
+            if (isSuccess === null) {
+                isSuccess = data.success === true || (data.success === undefined && !data.error);
+            }
+            
+            // Add appropriate class
+            if (isSuccess) {
+                element.classList.add('success');
+            } else {
+                element.classList.add('error');
+            }
+            
+            // Format response with status indicator
+            const statusText = isSuccess ? '✅ THÀNH CÔNG' : '❌ LỖI';
+            const statusClass = isSuccess ? 'status-success' : 'status-error';
+            const icon = isSuccess ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+            
+            element.innerHTML = `
+                <div class="status-indicator ${statusClass}">
+                    <i class="${icon}"></i>
+                    ${statusText}
+                </div>
+                <div>${JSON.stringify(data, null, 2)}</div>
+            `;
+        }
+
+        // Authentication functions
+        async function login() {
+            try {
+                const username = document.getElementById('loginUsername').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                if (!username || !password) {
+                    showResponse('authResponse', { error: 'Vui lòng nhập đầy đủ username và password' }, false);
+                    return;
+                }
+                
+                const response = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    authToken = data.data;
+                    showResponse('authResponse', { message: 'Đăng nhập thành công! 🎉', token: authToken }, true);
+                } else {
+                    showResponse('authResponse', data, false);
+                }
+            } catch (error) {
+                showResponse('authResponse', { error: error.message }, false);
+            }
+        }
+
+        async function logout() {
+            try {
+                const response = await fetch(`${API_BASE}/auth/logout`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                
+                const data = await response.json();
+                authToken = '';
+                showResponse('authResponse', data, data.success);
+            } catch (error) {
+                showResponse('authResponse', { error: error.message }, false);
+            }
+        }
+
+        // Upload Avatar function
+        async function uploadAvatar() {
+            try {
+                if (!authToken) {
+                    showResponse('avatarResponse', { error: 'Vui lòng đăng nhập trước! 🔐' }, false);
+                    return;
+                }
+
+                const fileInput = document.getElementById('avatarFile');
+                const file = fileInput.files[0];
+                
+                if (!file) {
+                    showResponse('avatarResponse', { error: 'Vui lòng chọn file ảnh! 📷' }, false);
+                    return;
+                }
+
+                // Show progress bar
+                const progressBar = document.getElementById('avatarProgress');
+                const progressFill = document.getElementById('avatarProgressFill');
+                progressBar.style.display = 'block';
+                progressFill.style.width = '0%';
+
+                // Create FormData
+                const formData = new FormData();
+                formData.append('avatar', file);
+
+                // Show preview
+                const preview = document.getElementById('avatarPreview');
+                preview.style.display = 'block';
+                preview.innerHTML = `<img src="${URL.createObjectURL(file)}" class="preview-image pulse" alt="Preview">`;
+
+                // Upload with progress tracking
+                const response = await fetch(`${API_BASE}/users/upload-avatar`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: formData
+                });
+
+                // Simulate progress
+                let progress = 0;
+                const progressInterval = setInterval(() => {
+                    progress += 10;
+                    progressFill.style.width = progress + '%';
+                    if (progress >= 100) {
+                        clearInterval(progressInterval);
+                    }
+                }, 100);
+
+                const data = await response.json();
+                
+                // Hide progress bar
+                setTimeout(() => {
+                    progressBar.style.display = 'none';
+                }, 1000);
+
+                showResponse('avatarResponse', data, data.success);
+                
+                if (data.success) {
+                    // Clear file input
+                    fileInput.value = '';
+                    updateFileLabel('avatarLabel', 'Kéo thả hoặc click để chọn ảnh');
+                }
+            } catch (error) {
+                showResponse('avatarResponse', { error: error.message }, false);
+            }
+        }
+
+        // Upload Multiple Images function
+        async function uploadMultipleImages() {
+            try {
+                if (!authToken) {
+                    showResponse('multipleResponse', { error: 'Vui lòng đăng nhập trước! 🔐' }, false);
+                    return;
+                }
+
+                const fileInput = document.getElementById('multipleImages');
+                const files = fileInput.files;
+                
+                if (files.length === 0) {
+                    showResponse('multipleResponse', { error: 'Vui lòng chọn ít nhất một file ảnh! 📷' }, false);
+                    return;
+                }
+
+                // Show progress bar
+                const progressBar = document.getElementById('multipleProgress');
+                const progressFill = document.getElementById('multipleProgressFill');
+                progressBar.style.display = 'block';
+                progressFill.style.width = '0%';
+
+                // Create FormData
+                const formData = new FormData();
+                for (let i = 0; i < files.length; i++) {
+                    formData.append('images', files[i]);
+                }
+
+                // Show preview
+                const preview = document.getElementById('multiplePreview');
+                preview.style.display = 'block';
+                preview.innerHTML = '';
+                for (let i = 0; i < files.length; i++) {
+                    const img = document.createElement('img');
+                    img.src = URL.createObjectURL(files[i]);
+                    img.className = 'preview-image pulse';
+                    img.alt = `Preview ${i + 1}`;
+                    preview.appendChild(img);
+                }
+
+                // Upload with progress tracking
+                const response = await fetch(`${API_BASE}/users/upload-multiple-images`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: formData
+                });
+
+                // Simulate progress
+                let progress = 0;
+                const progressInterval = setInterval(() => {
+                    progress += 10;
+                    progressFill.style.width = progress + '%';
+                    if (progress >= 100) {
+                        clearInterval(progressInterval);
+                    }
+                }, 100);
+
+                const data = await response.json();
+                
+                // Hide progress bar
+                setTimeout(() => {
+                    progressBar.style.display = 'none';
+                }, 1000);
+
+                showResponse('multipleResponse', data, data.success);
+                
+                if (data.success) {
+                    // Clear file input
+                    fileInput.value = '';
+                    updateFileLabel('multipleLabel', 'Kéo thả hoặc click để chọn nhiều ảnh');
+                }
+            } catch (error) {
+                showResponse('multipleResponse', { error: error.message }, false);
+            }
+        }
+
+        // File input change handlers
+        document.getElementById('avatarFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                updateFileLabel('avatarLabel', `📷 ${file.name}`, true);
+                const preview = document.getElementById('avatarPreview');
+                preview.style.display = 'block';
+                preview.innerHTML = `<img src="${URL.createObjectURL(file)}" class="preview-image pulse" alt="Preview">`;
+            }
+        });
+
+        document.getElementById('multipleImages').addEventListener('change', function(e) {
+            const files = e.target.files;
+            if (files.length > 0) {
+                updateFileLabel('multipleLabel', `📷 ${files.length} file(s) đã chọn`, true);
+                const preview = document.getElementById('multiplePreview');
+                preview.style.display = 'block';
+                preview.innerHTML = '';
+                for (let i = 0; i < files.length; i++) {
+                    const img = document.createElement('img');
+                    img.src = URL.createObjectURL(files[i]);
+                    img.className = 'preview-image pulse';
+                    img.alt = `Preview ${i + 1}`;
+                    preview.appendChild(img);
+                }
+            }
+        });
+
+        // Update file label
+        function updateFileLabel(labelId, text, isSelected = false) {
+            const label = document.getElementById(labelId);
+            const icon = isSelected ? 'fas fa-check-circle' : 'fas fa-cloud-upload-alt';
+            const smallText = isSelected ? 'File đã được chọn' : 'PNG, JPG, JPEG (Max 5MB)';
+            
+            label.innerHTML = `
+                <i class="${icon}"></i>
+                <span>${text}</span>
+                <small>${smallText}</small>
+            `;
+            
+            if (isSelected) {
+                label.classList.add('file-selected');
+            } else {
+                label.classList.remove('file-selected');
+            }
+        }
+
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Add click ripple effect to buttons
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.classList.add('ripple');
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
